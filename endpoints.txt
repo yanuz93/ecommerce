@@ -1,0 +1,15 @@
+Endpoints and what will they do:
+. home ('/') - get all public products
+. user login ('/user/login') - get client data to give token, if not registered, redirect to signup ('/signup')
+. user signup ('/user/register') - post client data to be registered
+. seller signup ('/seller/register') - post seller data to be registered
+. seller login ('/seller/login') - 
+. seller signup ('/seller/register') - post seller data to be registered
+. seller login ('/seller/login') - get seller data to give token, if not registered, redirect to signup ('/signup')
+. cart ('/user/cart') - get all unpaid order
+. cart ('/user/cart/edit') - put current cart detail
+. cart ('/user/cart/delete') - delete current cart
+. order ('/products/order') - get products detail and patch it to cart
+. checkout ('/products/checkout') - bypass cart, create invoice
+. invoice ('/seller/invoice/<invoice_id>')
+. 

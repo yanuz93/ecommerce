@@ -1,0 +1,28 @@
+What are needed?
+What can they do?
+Tell me the logic behinds:
+
+- Authentication :
+	- need to get client-key
+
+- Admin : can do anything
+
+- Customer : (can order, pay, update debet, edit detail)
+	- username (need to be unique?)
+	- email (has to be unique!)
+	- address
+
+- Seller : (can add goods, update or delete, receive invoice order, receive payment, 
+	- username
+	- email (has to be unique)
+	- 
+
+- Products : (forbidden_goods, public, vip_only(optional), can only be added by admin or seller)
+	- name (hasn't to be unique)
+	- price
+	- quantity
+	- weight
+
+- Cart : (can have many products from many sellers, will be deleted after checkout, skipped when checkout clicked)
+	- products_id
+	- 
