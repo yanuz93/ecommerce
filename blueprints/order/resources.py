@@ -14,6 +14,9 @@ class OrderResource(Resource):
     def __init__(self):
         pass
     
+    def options(self, id=None):
+        return {"status": "oke"}
+
     @jwt_required
     # @customer_required
     def get(self):
@@ -44,10 +47,11 @@ class OrderResource(Resource):
             rows = []
             for row in detail.all():
                 # marshal_row = marshal(row, isi_data)
-                isi_data = OrderDetails.response_fields
+                isi_data = marshal(row, OrderDetails.response_fields)
                 isi_data['product_name'] = Products.query.get(row.product_id).name
                 isi_data['seller_name'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).name
-                rows.append(marshal(row, isi_data))
+                isi_data['foto_product'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).url_foto
+                rows.append(isi_data)
             
             ans['data'] = rows
             return ans, 200
@@ -65,8 +69,8 @@ class OrderResource(Resource):
                     isi_data = marshal(row, OrderDetails.response_fields)
                     isi_data['product_name'] = Products.query.get(row.product_id).name
                     isi_data['seller_name'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).name
+                    isi_data['foto_product'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).url_foto
                     rows.append(isi_data)
-                    # rows.append(isi_data)
                 
                 ans["datas"] = rows
                 all_data.append(ans)
@@ -77,9 +81,9 @@ class OrderResource(Resource):
     # @customer_required
     def post(self, id):
         current_user = get_jwt_identity()
-        order = Orders.query.filter_by(customer_id = current_user, status = True).first()
+        order = Orders.query.filter_by(customer_id = current_user, status = False).first()
         if order == None:
-            order = Orders(customer_id = current_user, total_qty=0, total_price=0, status=True)
+            order = Orders(customer_id = current_user, total_qty=0, total_price=0, status=False)
             db.session.add(order)
             db.session.commit()
         

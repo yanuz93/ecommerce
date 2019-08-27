@@ -10,7 +10,8 @@ api = Api(bp_seller_auth)
 
 ### Resources
 class CreateSellerTokenResources(Resource):
-
+    def options(self, id=None):
+        return {"status": "oke"}
     def get(self):
         parser = reqparse.RequestParser()
         parser.add_argument('email', location= 'json', required= True)

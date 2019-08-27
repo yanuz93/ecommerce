@@ -11,7 +11,8 @@ api = Api(bp_category)
 class CategoryResource(Resource):
     def __init__(self):
         pass
-    
+    def options(self, id=None):
+        return {"status": "oke"}    
     def get(self, id):
         qry = Category.query.get(id)
         if qry is not None:

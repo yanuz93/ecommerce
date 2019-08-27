@@ -11,7 +11,10 @@ api = Api(bp_customer_auth)
 ### Resources
 class CreateCustomerTokenResources(Resource):
 
-    def get(self):
+    def options(self, id=None):
+        return {"status": "oke"}
+
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('email', location= 'json', required= True)
         parser.add_argument('password', location= 'json', required= True)
@@ -32,10 +35,10 @@ class CreateCustomerTokenResources(Resource):
         token = create_access_token(identity= qry.id, user_claims= customer_data)
         return {'token': token}, 200
 
-    @jwt_required
-    def post(self):
-        claims = get_jwt_claims()
-        return {'claims': claims}, 200
+    # @jwt_required
+    # def post(self):
+    #     claims = get_jwt_claims()
+    #     return {'claims': claims}, 200
 
 class RefreshCustomerTokenResources(Resource):
     @jwt_required

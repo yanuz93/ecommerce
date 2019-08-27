@@ -12,6 +12,9 @@ class ProductResource(Resource):
 
     def __init__(self):
         pass
+
+    def options(self, id=None):
+        return {"status": "oke"}    
     
     def get(self, id):
         qry = Products.query.get(id)

@@ -10,28 +10,29 @@ class Customers(db.Model):
     url_foto = db.Column(db.String(200))
     password = db.Column(db.String(32), nullable=False)
     phone_number = db.Column(db.String(20), unique=True, nullable=False)
-    sex = db.Column(db.String(10))
     address = db.Column(db.String(500))
+    sex = db.Column(db.String(10))
     status = db.Column(db.Integer, default=999)
 
     response_fields = {
         'id': fields.Integer,
         'name': fields.String,
         'email': fields.String,
-        'phone_number': fields.String,
-        'sex': fields.String,
-        'address': fields.String,
         'password': fields.String,
-        'status': fields.String
+        'phone_number': fields.String,
+        'address': fields.String,
+        'sex': fields.String,
+        'status': fields.String,
+        'url_foto': fields.String
     }
 
     def __init__(self, name, email, password, phone_number, address, sex, status, url_foto):
         self.name = name
         self.email = email
         self.password = password
+        self.phone_number = phone_number
         self.address = address
         self.sex = sex
-        self.phone_number = phone_number
         self.status = status
         self.url_foto = url_foto
 

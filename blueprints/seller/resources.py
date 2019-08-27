@@ -12,7 +12,8 @@ class SellerResource(Resource):
     
     def __init__(self):
         pass
-    
+    def options(self, id=None):
+        return {"status": "oke"}    
     @jwt_required
     def get(self, id):
         # if id == self.current_seller_id:
