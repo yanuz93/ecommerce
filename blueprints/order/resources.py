@@ -43,13 +43,13 @@ class OrderResource(Resource):
             ans["total_price"] = order.total_price
             rows = []
             for row in detail.all():
+                # marshal_row = marshal(row, isi_data)
                 isi_data = OrderDetails.response_fields
-                marshal_row = marshal(row, isi_data)
-                isi_data['product_name'] = Products.query.get(marshal_row['product_id'])['name']
-                isi_data['seller_name'] = Sellers.query.get(get(marshal_row.product_id)['seller_id'])['name']
+                isi_data['product_name'] = Products.query.get(row.product_id).name
+                isi_data['seller_name'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).name
                 rows.append(marshal(row, isi_data))
             
-            ans["data"] = rows
+            ans['data'] = rows
             return ans, 200
 
         elif args['status'] == True:
@@ -62,7 +62,11 @@ class OrderResource(Resource):
                 detail = OrderDetails.query.filter_by(order_id = data.id, status = True)
                 rows = []
                 for row in detail.all():
-                    rows.append(marshal(row, OrderDetails.response_fields))
+                    isi_data = marshal(row, OrderDetails.response_fields)
+                    isi_data['product_name'] = Products.query.get(row.product_id).name
+                    isi_data['seller_name'] = Sellers.query.get(Products.query.get(row.product_id).seller_id).name
+                    rows.append(isi_data)
+                    # rows.append(isi_data)
                 
                 ans["datas"] = rows
                 all_data.append(ans)

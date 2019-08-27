@@ -62,7 +62,8 @@ def customer_required(f):
 ###################################
 
 app.config['APP_DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:matematika@localhost:3306/tokodaring'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:matematika@localhost:3306/tokodaring'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:mathUGM11@ecommercedb.cpqwkx2hzvh3.ap-southeast-1.rds.amazonaws.com:3306/tokodaring'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
