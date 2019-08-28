@@ -34,7 +34,7 @@ class OrderDetails(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
     qty = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    status = db.Column(db.Boolean, default= True)
+    status = db.Column(db.Integer)
     createdAt = db.Column(db.DateTime, default= db.func.current_timestamp())
     updatedAt = db.Column(db.DateTime, default= db.func.current_timestamp())
 
@@ -47,11 +47,13 @@ class OrderDetails(db.Model):
         'seller_name': fields.String
     }
 
-    def __init__(self, product_id, qty, price, order_id):
+    def __init__(self, order_id, product_id, qty, price, status, updatedAt):
+        self.order_id = order_id
         self.product_id = product_id
         self.qty = qty
         self.price = price
-        self.order_id = order_id
+        self.status = status
+        self.updatedAt = updatedAt
 
     def __repr__(self):
         return '<OrderDetails %r>' % self.id

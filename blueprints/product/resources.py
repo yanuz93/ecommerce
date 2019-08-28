@@ -129,4 +129,3 @@ class ProductList(Resource):
 
 api.add_resource(ProductList, '/list')
 api.add_resource(ProductResource, '', '/<id>')
-

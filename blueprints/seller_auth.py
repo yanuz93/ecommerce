@@ -12,7 +12,7 @@ api = Api(bp_seller_auth)
 class CreateSellerTokenResources(Resource):
     def options(self, id=None):
         return {"status": "oke"}
-    def get(self):
+    def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument('email', location= 'json', required= True)
         parser.add_argument('password', location= 'json', required= True)
@@ -32,11 +32,6 @@ class CreateSellerTokenResources(Resource):
         seller_data.pop("email")
         token = create_access_token(identity= qry.id, user_claims= seller_data)
         return {'token': token}, 200
-
-    @jwt_required
-    def post(self):
-        claims = get_jwt_claims()
-        return {'claims': claims}, 200
 
 class RefreshSellerTokenResources(Resource):
     @jwt_required
